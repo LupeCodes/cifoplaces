@@ -174,10 +174,10 @@ class Base implements TemplateInterface{
         // parte izquierda (operaciones para todos los usuarios)
         $html = "<menu class='menu'>";
         $html .=   "<li><a href='/'>Inicio</a></li>";
-        $html .=   "<li><a href='/Places/list'>Lugares</a></li>";
+        $html .=   "<li><a href='/Place/list'>Lugares</a></li>";
         
         if(Login::user())
-            $html .=   "<li><a href='/Places/create'>Nuevo lugar</a></li>";
+            $html .=   "<li><a href='/Place/create'>Nuevo lugar</a></li>";
         
         // Enlace a los ejemplos de maquetación.
         // Lo eliminaremos en producción junto con la carpeta mvc/views/examples y el ExampleController

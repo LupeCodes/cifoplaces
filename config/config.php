@@ -154,7 +154,14 @@ define('USER_IMAGE_FOLDER','/images/users');
 // imagen por defecto para los usuarios que no tengan
 define('DEFAULT_USER_IMAGE', 'default.png');
 
+// carpeta para las imágenes de los lugares
+define('PLACE_IMAGE_FOLDER','/images/places');
 
+// imagen por defecto para los usuarios que no tengan
+define('DEFAULT_PLACE_IMAGE', 'default.jpg');
+
+// carpeta para las fotos
+define('PHOTO_IMAGE_FOLDER','/images/photos');
 
 /* -------------------------------------------------------------
  * LOGIN

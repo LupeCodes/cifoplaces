@@ -48,8 +48,13 @@
     				<a href="/Forgotpassword">Olvidé mi clave</a>
     			</div>
     			
+    			
+    			
     		</form>
-
+			<div class="centered m2">
+    			<p>¿Todavía no tienes cuenta?</p>
+    			<a class='button' href='/User/create'>Registrate</a>
+    		</div>
     		
 		</main>
 		
