@@ -89,6 +89,7 @@ class Base implements TemplateInterface{
             // prepara el HTML solamente con el botón de "LogIn"
             $html = " 
             <div class='derecha'>
+               <a class='button' href='/User/create'>Registrate</a>
                <a class='button' href='/Login'>LogIn</a>
             </div>";
             
@@ -173,6 +174,10 @@ class Base implements TemplateInterface{
         // parte izquierda (operaciones para todos los usuarios)
         $html = "<menu class='menu'>";
         $html .=   "<li><a href='/'>Inicio</a></li>";
+        $html .=   "<li><a href='/Places/list'>Lugares</a></li>";
+        
+        if(Login::user())
+            $html .=   "<li><a href='/Places/create'>Nuevo lugar</a></li>";
         
         // Enlace a los ejemplos de maquetación.
         // Lo eliminaremos en producción junto con la carpeta mvc/views/examples y el ExampleController

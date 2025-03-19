@@ -60,7 +60,7 @@ define('AUTOLOAD_DIRECTORIES',  [
  * APLICACIÓN
  * -------------------------------------------------------------*/
 
-define('APP_NAME', 'FastLight Framework');   // Título de la aplicación.
+define('APP_NAME', 'CifoPlaces');   // Título de la aplicación.
 define('APP_TYPE', 'WEB');                   // Tipo de aplicación: WEB o API.
 
 define('APP_VERSION', '1.8.7');  // versión actual del framework o aplicación desarrollada
@@ -110,7 +110,7 @@ define('RESPONSE_CHARSET', 'utf-8'); // charset para las respuestas HTTP
 define('DB_HOST','localhost');  // Host.
 define('DB_USER','root');       // Usuario.
 define('DB_PASS','');           // Password.
-define('DB_NAME','fastlight');  // Nombre de la base de datos.
+define('DB_NAME','cifoplaces');  // Nombre de la base de datos.
 define('DB_PORT',  3306);       // Puerto.
 define('DB_CHARSET','utf8');    // Codificación de caracteres.
 
