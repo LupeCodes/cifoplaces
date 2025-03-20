@@ -94,6 +94,11 @@
 }
 
 	
+figure img.icon {
+    width: 25px;
+    margin-right: 0px;
+    vertical-align: bottom;
+}	
 
 /* =========================  PARA TODOS LOS ELEMENTOS ======================= */
 

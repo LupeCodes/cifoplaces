@@ -133,6 +133,7 @@ define('USER_PROVIDER', 'User');
 define('USER_ROLES', [
     'Usuario'       => 'ROLE_USER',
     'Administrador' => 'ROLE_ADMIN',
+    'Moderador'     => 'ROLE_MODERADOR',
     'Supervisor'    => 'ROLE_SUPERVISOR',
     'Editor'        => 'ROLE_EDITOR',
     'Test'          => 'ROLE_TEST',
@@ -163,6 +164,8 @@ define('DEFAULT_PLACE_IMAGE', 'default.jpg');
 // carpeta para las fotos
 define('PHOTO_IMAGE_FOLDER','/images/photos');
 
+// imagen por defecto para los fotos que no tengan
+define('DEFAULT_PHOTO_IMAGE', 'default.png');
 /* -------------------------------------------------------------
  * LOGIN
  * -------------------------------------------------------------*/

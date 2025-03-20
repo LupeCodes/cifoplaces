@@ -45,6 +45,7 @@
     				
     				<p><b>Nombre:</b>			<?=$place->name?></p>
             		<p><b>Tipo:</b>				<?=$place->type?></p>
+            		<p><b>Autor:</b>			<?=$autor->displayname?></p>
             		<p><b>Descripcion:</b>		<?=$place->description?></p>
             		<p><b>Localizacion:</b>		<?=$place->location?></p>
             		<p><b>Latitud:</b>			<?=$place->latitude?></p>
@@ -64,6 +65,7 @@
 			-->
 			<section>
 				<h2>Fotos de <?=$place->name?></h2>
+				<a class="button" href="/Photo/create/<?= $place->id ?>">Nueva foto</a>
 				<?php 
 				if(!$photos){
 				    echo "<div class='warning p2'><p>Aún no hay más fotos.</p></div>";
@@ -76,7 +78,14 @@
           					<a href="/Photo/show/<?= $photo->id ?>">
           						<img src="<?=PHOTO_IMAGE_FOLDER.'/'.$photo->file?>">
           					</a>	
-          					<figcaption><?= $photo->name?></figcaption>
+          					<figcaption><?= $photo->name?>
+          						<a href="/Photo/edit/<?= $photo->id ?>">
+          							<img class="icon" src="/images/template/editar.png">
+          						</a>
+          						<a href="/Photo/delete/<?= $photo->id ?>">
+          							<img class="icon" src="/images/template/borrar.png">
+          						</a>
+          					</figcaption>
           				</figure>
 					<?php } ?>	
 						
@@ -101,8 +110,9 @@
         						<a href='/Comment/destroy/<?=$comment->id?>'>Borrar</a>
         					<?php } ?>
         				</div>
+        				<br>
         			<?php } ?>
-        		</table>
+        		
 			</section>
 			
 			<div clas="centrado">

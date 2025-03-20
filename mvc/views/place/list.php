@@ -29,9 +29,7 @@
 		<main>
 			<h1><?= APP_NAME ?></h1>
 			<h2>Lista completa de lugares</h2>
-			
-			<?php if ($places){ ?>
-				<!-- FILTRO DE BUSQUEDA -->
+			<!-- FILTRO DE BUSQUEDA -->
 				<?php 
 				//si hay filtro guardado en sesion...
 				if($filtro){
@@ -63,6 +61,8 @@
 				    );
 				}
 				?>
+			<?php if ($places){ ?>
+				
 			
 				<!-- Enlaces creados por el paginator -->
 				<div class="right">
@@ -101,7 +101,7 @@
         		<?= $paginator->ellipsisLinks() ?>
         	<?php }else{ ?>
         		<div class="danger p2">
-        			<p>No hay libros que mostrar</p>
+        			<p>No hay lugares que mostrar</p>
         		</div>
         	<?php } ?>
         	
