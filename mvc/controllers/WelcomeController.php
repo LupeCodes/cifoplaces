@@ -18,8 +18,13 @@ class WelcomeController extends Controller{
      * @return ViewResponse
      * 
      * */
-    public function index():ViewResponse{
-        return view('welcome');
+    public function index():Response{
+        //recuperamos los ultimas 5 fotos, para poder poner las "novedades" en la portada
+        $photos = V_picture::orderBy('id','desc', 6);
+        
+        return view('welcome', [
+            'photos' => $photos
+        ]);
     }  
 }
 

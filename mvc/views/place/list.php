@@ -72,9 +72,7 @@
         			<tr>
         				<th>Foto Principal</th><th>Nombre</th><th>Tipo</th>
         				<th>Localizacion</th>
-        				<?php if(Login::role('ROLE_ADMIN')){?>
-        				<th class="centrado">Operaciones</th>
-        				<?php } ?>
+        				
         			</tr>
         			<?php foreach($places as $place){?>
         				<tr>
@@ -88,13 +86,8 @@
         					<td><a href='/Place/show/<?=$place->id?>'><?=$place->name?></a></td>
         					<td><?=$place->type?></td>
         					<td><?=$place->location?></td>
-        					<?php if(Login::role('ROLE_ADMIN')){?>
-        						<td><a href='/Place/edit/<?=$place->id?>'>Editar</a>
-            					    <?php if(!$libro->ejemplares){?>
-            					    <a href='/Place/delete/<?=$place->id?>'>Borrar</a>
-            					    <?php } ?>
-            				<?php } ?>		    
-        					</td>
+        					    
+        					
         				</tr>
         			<?php } ?>
         		</table>

@@ -45,18 +45,30 @@ class CommentController extends Controller{
         
         
         //lo recuperamos de la BDD
-        $comment = Comment::findOrFail($id, "No se encontró el comentario");
+        $comment = V_comment::findOrFail($id, "No se encontró el comentario");
+     
+        
+        if($comment->idplace <> NULL){
+            $place = Place::find($comment->idplace);
+        }else{
+            $photo = Photo::find($comment->idphoto);
+        }
         
         //recuperamos el usuario que ha hecho login
         $usuario = Login::user();
         $idlogin = $usuario->id;
         
             //solo puede borrar el autor del comentario o un admin o moderador
-        if($idlogin == $comment->iduser || Login::oneRole(['ROLE_ADMIN', 'ROLE_MODERADOR'])){
+        if($idlogin == $comment->iduser 
+            || (Login::user()->id == $place->iduser || Login::user()->id == $photo->iduser) 
+            || Login::oneRole(['ROLE_ADMIN', 'ROLE_MODERADOR'])){
                 
                 
             try{
-                $comment->deleteObject();
+                Comment::delete($comment->id);
+                
+               // dd($comment);
+                
                 Session::Success('Se borró el comentario');
                 return redirect($comment->idplace ? "/Place/show/$comment->idplace" : "/Photo/show/$comment->idphoto");
                     

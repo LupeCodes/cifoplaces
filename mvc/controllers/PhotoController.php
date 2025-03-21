@@ -214,13 +214,16 @@ class PhotoController extends Controller{
         $photo = Photo::findOrFail($id, "No se encontró la foto");
         $placeid = $photo->idplace;
         
+        $place = Place::findOrFail($placeid);
+        
+        
         //recuperamos el usuario que ha hecho login
         $usuario = Login::user();
         $idlogin = $usuario->id;
         //Solo lo haremos si el usuario que intenta hacerlo es el usuario que lo ha creado
         //if($idlogin <> $anuncio->iduser && !Login::oneRole(['ROLE_ADMIN', 'ROLE_MODERADOR']))
         //    throw new AuthException('Tú no puedes borrar esto, colegui');
-        if($idlogin == $photo->iduser || Login::oneRole(['ROLE_ADMIN', 'ROLE_MODERADOR'])){
+        if($idlogin == $photo->iduser || Login::user()->id == $place->iduser || Login::oneRole(['ROLE_ADMIN', 'ROLE_MODERADOR'])){
             
             try{
                 $photo->deleteObject();

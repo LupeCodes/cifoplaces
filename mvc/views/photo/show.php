@@ -73,7 +73,7 @@
 				<?php if(Login::user()->id == $photo->iduser){ ?>
     				<a class="button" href="/Photo/edit/<?= $photo->id ?>">Editar</a>
     			<?php } ?>	
-    			<?php if(Login::user()->id == $photo->iduser || Login::oneRole(['ROLE_ADMIN', 'ROLE_MODERADOR'])){ ?>	
+    			<?php if(Login::user()->id == $photo->iduser || Login::user()->id == $place->iduser || Login::oneRole(['ROLE_ADMIN', 'ROLE_MODERADOR'])){ ?>	
     				<a class="button" onclick="confirmar(<?= $photo->id ?>)" href="/Photo/destroy/<?= $photo->id ?>">Borrar</a>
     			<?php } ?>
 			</section>
@@ -109,9 +109,7 @@
         					</p>
         					<p><?=$comment->text?></p>
         					<p><?=$comment->created_at?></p>
-        					<?php if(Login::role('ROLE_ADMIN')){?>
-        						<a href='/Comment/destroy/<?=$comment->id?>'>Borrar</a>
-        					<?php } ?>
+        					
         					
         					
             					<!-- El script para borrar los comentarios -->	
@@ -122,8 +120,8 @@
         					}
         					</script>
         					
-          					<?php if(Login::user()->id == $comment->iduser || Login::oneRole(['ROLE_ADMIN', 'ROLE_MODERADOR'])){ ?>
-          						<a onclick="confirmarcoment(<?= $comment->id ?>)" href="/Comment/destroy/<?= $comment->id ?>">
+          					<?php if(Login::user()->id == $comment->iduser || (Login::user()->id == $place->iduser || Login::user()->id == $photo->iduser) || Login::oneRole(['ROLE_ADMIN', 'ROLE_MODERADOR'])){ ?>
+          						<a onclick="confirmarcoment(<?= $comment->id ?>)">
           							<img class="icon" src="/images/template/borrar.png">
           						</a>
           					<?php } ?>

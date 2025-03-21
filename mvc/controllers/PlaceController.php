@@ -46,13 +46,11 @@ class PlaceController extends Controller{
         $place = Place::findOrFail($id);    //busca el place con ese ID
         $photos = $place->hasMany('Photo');
         $comments = $place->hasMany('V_comment');
-        $autor = User::findOrFail($place->iduser);
         //carga la vista y le pasa el place recuperado
         return view('Place/show',[
             'place' => $place,
             'photos' => $photos,
-            'comments' => $comments,
-            'autor'  => $autor
+            'comments' => $comments
         ]);
     }
     

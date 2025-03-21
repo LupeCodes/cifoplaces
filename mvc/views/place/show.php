@@ -70,7 +70,7 @@
 				<?php if(Login::user()->id == $place->iduser){ ?>
     				<a class="button" href="/Place/edit/<?= $place->id ?>">Editar</a>
     			<?php } ?>	
-    			<?php if(Login::user()->id == $place->iduser || Login::oneRole(['ROLE_ADMIN', 'ROLE_MODERADOR'])){ ?>	
+    			<?php if(Login::user()->id == $place->iduser  || Login::oneRole(['ROLE_ADMIN', 'ROLE_MODERADOR'])){ ?>	
     				<a class="button" onclick="confirmardos(<?= $place->id ?>)" href="/Place/destroy/<?= $place->id ?>">Borrar</a>
     			<?php } ?>
 			</section>
@@ -111,7 +111,7 @@
           							<img class="icon" src="/images/template/editar.png">
           						</a>
           					<?php } ?>	
-          					<?php if(Login::user()->id == $photo->iduser || Login::oneRole(['ROLE_ADMIN', 'ROLE_MODERADOR'])){ ?>
+          					<?php if(Login::user()->id == $photo->iduser || Login::user()->id == $place->iduser || Login::oneRole(['ROLE_ADMIN', 'ROLE_MODERADOR'])){ ?>
           						<a onclick="confirmar(<?= $photo->id ?>)" href="/Photo/destroy/<?= $photo->id ?>">
           							<img class="icon" src="/images/template/borrar.png">
           						</a>
@@ -147,9 +147,11 @@
 				
 				
         		<?php foreach($comments as $comment){?>
+        			<?php $autor = User::find($comment->iduser)?>
         			<div class="border p1">
         				<p>
-        					<img src="<?=USER_IMAGE_FOLDER.'/'.$autor->picture ?? DEFAULT_USER_IMAGE ?>"
+        				
+        					<img src="<?=USER_IMAGE_FOLDER.'/'. ($autor->picture ?? DEFAULT_USER_IMAGE) ?>"
         								class="table-image">
         						<b>Autor:</b><?=$comment->username?>
         				</p>
@@ -165,7 +167,7 @@
         					}
         				</script>
         					
-          				<?php if(Login::user()->id == $comment->iduser || Login::oneRole(['ROLE_ADMIN', 'ROLE_MODERADOR'])){ ?>
+          				<?php if(Login::user()->id == $comment->iduser || (Login::user()->id == $place->iduser || Login::user()->id == $photo->iduser) || Login::oneRole(['ROLE_ADMIN', 'ROLE_MODERADOR'])){ ?>
           					<a onclick="confirmarcoment(<?= $comment->id ?>)" href="/Comment/destroy/<?= $comment->id ?>">
           						<img class="icon" src="/images/template/borrar.png">
           					</a>
