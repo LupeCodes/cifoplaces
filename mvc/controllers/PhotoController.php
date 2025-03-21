@@ -206,4 +206,40 @@ class PhotoController extends Controller{
     }//FIN DE UPDATE
     
     
+    //DESTROY--------------------------------------------------------------------
+    public function destroy(int $id = 0){
+        
+        
+        //lo recuperamos de la BDD
+        $photo = Photo::findOrFail($id, "No se encontró la foto");
+        $placeid = $photo->idplace;
+        
+        //recuperamos el usuario que ha hecho login
+        $usuario = Login::user();
+        $idlogin = $usuario->id;
+        //Solo lo haremos si el usuario que intenta hacerlo es el usuario que lo ha creado
+        //if($idlogin <> $anuncio->iduser && !Login::oneRole(['ROLE_ADMIN', 'ROLE_MODERADOR']))
+        //    throw new AuthException('Tú no puedes borrar esto, colegui');
+        if($idlogin == $photo->iduser || Login::oneRole(['ROLE_ADMIN', 'ROLE_MODERADOR'])){
+            
+            try{
+                $photo->deleteObject();
+                Session::Success('Foto eliminada correctamente.');
+                return redirect("/Place/show/$placeid");
+                
+            }catch(SQLException $e){
+                
+                Session::error('No se pudo borrar la foto');
+                
+                if(DEBUG)
+                    throw new Exception($e->getMessage());
+                    
+                    return redirect("/User/home");
+            }
+        }else{
+            throw new AuthException('Tú no puedes borrar esto, colegui');
+        }
+    }//FIN DE DESTROY
+    
+    
 }//FIN DE LA CLASE

@@ -61,19 +61,47 @@
             		
 			</section>
 			
-			<!--
 			<section>
-				<h2>Descripcion</h2>
-				<p><?=$place->description ? paragraph($place->description) : 'SIN DETALLES'?></p>
-			</section>
-			-->
 			
+			<!-- El script para borrar las fotos -->	
+        				<script>
+    					function confirmar(id){
+    						if(confirm('¿Seguro que deseas eliminar?'))
+    							location.href = '/Photo/destroy/'+id
+    					}
+    					</script>
+				<?php if(Login::user()->id == $photo->iduser){ ?>
+    				<a class="button" href="/Photo/edit/<?= $photo->id ?>">Editar</a>
+    			<?php } ?>	
+    			<?php if(Login::user()->id == $photo->iduser || Login::oneRole(['ROLE_ADMIN', 'ROLE_MODERADOR'])){ ?>	
+    				<a class="button" onclick="confirmar(<?= $photo->id ?>)" href="/Photo/destroy/<?= $photo->id ?>">Borrar</a>
+    			<?php } ?>
+			</section>
+			
+			
+			
+			<?php if(Login::user()){ ?>
+			<section>
+				<form method="POST" enctype="multipart/form-data" action="/Comment/store">
+    				<input type="hidden"  name="idphoto" value="<?= $photo->id ?>">
+    				<div class="flex2">
+            			<h3>Deja tu comentario</h3>
+        				<textarea name="text"><?= old('text') ?></textarea>
+        			
+            			<div class="centered mt2">
+            				<input type="submit" class="button" name="guardar" value="Guardar">
+            				<input type="reset" class="button"  value="Reset">
+            			</div>
+        			</div>			
+				</form>
+			</section>
+			<?php } ?>
 			
 			<section>
 				<h3>Comentarios en <b><?=$photo->name?></b></h3>
 				
         			<?php foreach($comments as $comment){?>
-        				<div class="border">
+        				<div class="border p1">
         					<p>
         						<img src="<?=USER_IMAGE_FOLDER.'/'.($user->picture ?? DEFAULT_USER_IMAGE) ?>"
         								class="table-image">
@@ -84,6 +112,21 @@
         					<?php if(Login::role('ROLE_ADMIN')){?>
         						<a href='/Comment/destroy/<?=$comment->id?>'>Borrar</a>
         					<?php } ?>
+        					
+        					
+            					<!-- El script para borrar los comentarios -->	
+            				<script>
+        					function confirmarcoment(id){
+        						if(confirm('¿Seguro que deseas eliminar?'))
+        							location.href = '/Comment/destroy/'+id
+        					}
+        					</script>
+        					
+          					<?php if(Login::user()->id == $comment->iduser || Login::oneRole(['ROLE_ADMIN', 'ROLE_MODERADOR'])){ ?>
+          						<a onclick="confirmarcoment(<?= $comment->id ?>)" href="/Comment/destroy/<?= $comment->id ?>">
+          							<img class="icon" src="/images/template/borrar.png">
+          						</a>
+          					<?php } ?>
         				</div>
         			<?php } ?>
         		</table>

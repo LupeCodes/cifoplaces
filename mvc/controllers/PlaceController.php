@@ -78,7 +78,9 @@ class PlaceController extends Controller{
         if(!request()->has('guardar'))
             //si la request NO tiene guardar lanza una excepcion
             throw new FormException('No se recibió el formulario');
-            
+         
+         //PRUEBA UNO   
+        //if(!empty(request()->file)){
             $place = new Place();   //creamos el nuevo Place
             
             //toma los datos que llegan por POST
@@ -107,7 +109,9 @@ class PlaceController extends Controller{
                         );
                     
                     //guarda el place en la base de datos
-                $place->save();
+                
+                //EL PLACE NO SE ALMACENA HASTA QUE NO ESTEMOS SEGUROS DE QUE TIENE FOTO
+                //$place->save();
                     
                 //recupera la imagen como objeto UploadedFile (o null si no llega)
                 $file = request()->file(
@@ -119,7 +123,10 @@ class PlaceController extends Controller{
                 //si hay fichero, lo guardamos y actualizamos el campo "mainpicture"
                 if($file){
                     $place->mainpicture = $file->store('../public/'.PLACE_IMAGE_FOLDER, 'place_');
-                    $place->update();   //actualiza el libro para añadir la portada
+                    //$place->update();   //actualiza el lugar para añadir la foto
+                    
+                    //ENTONCES EL ALMACENADO REAL SE HARIA AQUI
+                    $place->save();
                     
                     
                 //flashea un mensaje de éxito en la sesión
@@ -167,6 +174,11 @@ class PlaceController extends Controller{
                 //regresa al formulario de creacion de lugar
                 return redirect("/Place/create");
             }
+            //PRUEBA UNO
+       /* }else{
+            Session::error("No puedes crear un lugar sin foto principal.");
+            return redirect("/Place/create");
+        }*/
     }//FIN DE FUNCION STORE
     
     
