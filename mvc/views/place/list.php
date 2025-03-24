@@ -19,7 +19,7 @@
 	</head>
 	<body>
 		<?= $template->login() ?>
-		<?= $template->header('Lista de libros') ?>
+		<?= $template->header('Lista de lugares') ?>
 		<?= $template->menu() ?>
 		<?= $template->breadCrumbs([
 		    'Lugares' => 'Place/list'

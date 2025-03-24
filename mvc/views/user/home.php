@@ -6,7 +6,7 @@
 		
 		<!-- META -->
 		<meta name="viewport" content="width=device-width, initial-scale=1.0">
-		<meta name="description" content="lista de libros en <?= APP_NAME ?>">
+		<meta name="description" content="Detalles del socio en <?= APP_NAME ?>">
 		<meta name="author" content="Lupe Jiménez">
 		
 		<!-- FAVICON -->
@@ -22,7 +22,7 @@
 	</head>
 	<body>
 		<?= $template->login() ?>
-		<?= $template->header('Detalles del libro ', $libro->titulo) ?>
+		<?= $template->header('Detalles del socio ', $user->displayname) ?>
 		<?= $template->menu() ?>
 		<?= $template->breadCrumbs([
 		    $user->displayname => null
